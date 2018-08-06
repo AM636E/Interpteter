@@ -10,12 +10,13 @@
         Div,
         Lp,
         Rp,
-        Sin,
         ExprEnd,
         Out,
         Var,
         Assign,
-        Compare
+        Compare,
+        Pow,
+        Trig
     }
 
     public class Token
@@ -29,7 +30,11 @@
         public static Token Plus => new Token { Type = TokenType.Plus, Value = "+" };
         public static Token Minus => new Token { Type = TokenType.Minus, Value = "-" };
 
-        public static Token Sin => new Token { Type = TokenType.Sin, Value = "sin" };
+        public static Token Pow => new Token { Type = TokenType.Pow, Value = '^' };
+
+        public static Token Assign => new Token { Type = TokenType.Assign, Value = '=' };
+
+        public static Token Trig(string type) => new Token { Type = TokenType.Trig, Value = type };
 
         public override string ToString()
         {

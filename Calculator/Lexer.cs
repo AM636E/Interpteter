@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Calculator
 {
@@ -80,6 +78,18 @@ namespace Calculator
                     return new Token { Type = TokenType.Number, Value = Number() };
                 }
 
+                if (Peek(3) == "sin" || Peek(3) == "cos")
+                {
+                    var op = Peek(3);
+                    Advance(3);
+                    return Token.Trig(op);
+                }
+
+                if (char.IsLetterOrDigit(currentChar.Value))
+                {
+                    return new Token { Type = TokenType.Var, Value = Symbol() };
+                }
+
                 if (currentChar == '+')
                 {
                     Advance();
@@ -104,6 +114,12 @@ namespace Calculator
                     return Token.Div;
                 }
 
+                if(currentChar == '^')
+                {
+                    Advance();
+                    return Token.Pow;
+                }
+
                 if (currentChar == '(')
                 {
                     Advance();
@@ -116,20 +132,26 @@ namespace Calculator
                     return new Token { Type = TokenType.Rp, Value = ')' };
                 }
 
-                if (Peek(3) == "sin")
+                if(currentChar == '=')
                 {
-                    Advance(3);
-                    return Token.Sin;
-                }
-
-                if (Peek(2) == "PI")
-                {
-                    Advance(2);
-                    return new Token { Type = TokenType.Number, Value = Math.PI };
-                }
+                    Advance();
+                    return Token.Assign;
+                }                
             }
 
             return new Token { Type = TokenType.End };
+        }
+
+        private object Symbol()
+        {
+            string result = string.Empty;
+            while(currentChar.HasValue && char.IsLetterOrDigit(currentChar.Value))
+            {
+                result += currentChar;
+                Advance();
+            }
+
+            return result;
         }
     }
 }

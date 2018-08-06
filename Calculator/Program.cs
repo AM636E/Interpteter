@@ -6,10 +6,9 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            //new Interpreter("a=sin(PI/180 * 30); out a * 2;").Interpter();
-
             while (true)
             {
+                Console.Write(">>> ");
                 Console.WriteLine(new Interpreter(Console.ReadLine()).Interpter());
             }
 
