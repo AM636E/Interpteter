@@ -9,10 +9,16 @@ namespace Calculator
             while (true)
             {
                 Console.Write(">>> ");
-                Console.WriteLine(new Interpreter(Console.ReadLine()).Interpter());
+                var interpreter = new Interpreter(Console.ReadLine());
+                try
+                {
+                    Console.WriteLine(interpreter.Interpret());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-
-            Console.WriteLine("Hello World!");
         }
     }
 }

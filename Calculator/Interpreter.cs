@@ -1,4 +1,5 @@
 ﻿using Calculator.Ast.Nodes;
+using Calculator.Exceptions;
 using Calculator.Nodes;
 using Calculator.Symbols;
 using System;
@@ -6,6 +7,11 @@ using System.Collections.Generic;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Interprets AST.
+    /// Every operation represented as a node. 
+    /// Interpretation is done by visiting every node.
+    /// </summary>
     public class Interpreter : INodeVisitor
     {
         private Parser _parser;
@@ -62,7 +68,7 @@ namespace Calculator
             return number.Value;
         }
 
-        public double Interpter()
+        public double Interpret()
         {
             var ast = _parser.Parse();
 
@@ -83,7 +89,7 @@ namespace Calculator
                     }
             }
 
-            throw new Exception();
+            throw new UnexpectedOperationException(unaryOperation.Op);
         }
 
         public double VisitTrigonometric(TrigNode trigonometricOperation)
@@ -100,14 +106,19 @@ namespace Calculator
                     }
             }
 
-            throw new Exception();
+            throw new UnexpectedOperationException(trigonometricOperation.Op);
         }
 
+        /// <summary>
+        /// Verifies if there is a symbol and returns it value.
+        /// </summary>
+        /// <param name="symbolNode"></param>
+        /// <returns></returns>
         public double VisitVar(SymbolNode symbolNode)
         {
             if (!_symbolTable.HasSymbol(symbolNode.Symbol.Name))
             {
-                throw new Exception($"Unknown symbol: {symbolNode.Symbol.Name}.");
+                throw new UnknownSymbolException($"{symbolNode.Symbol.Name}");
             }
 
             if (SymbolNameToValue.ContainsKey(symbolNode.Symbol.Name))
@@ -115,9 +126,14 @@ namespace Calculator
                 return SymbolNameToValue[symbolNode.Symbol.Name];
             }
 
-            return 0;
+            throw new UnknownSymbolException(symbolNode.Symbol.Name);
         }
 
+        /// <summary>
+        /// Defines a symbol in symbol table and computes its value.
+        /// </summary>
+        /// <param name="assignNode"></param>
+        /// <returns></returns>
         public double VisitAssign(AssignNode assignNode)
         {
             _symbolTable.Define(assignNode.Symbol.Symbol);

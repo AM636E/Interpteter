@@ -1,10 +1,13 @@
 ﻿using Calculator.Ast.Nodes;
+using Calculator.Exceptions;
 using Calculator.Nodes;
 using Calculator.Symbols;
-using System;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Parses a string and return an AST.
+    /// </summary>
     public class Parser
     {
         private Lexer _lexer;
@@ -21,6 +24,10 @@ namespace Calculator
             return Expr();
         }
 
+        /// <summary>
+        /// Addition and Substraction.
+        /// </summary>
+        /// <returns></returns>
         public AbstractSyntaxTree Expr()
         {
             var result = Term();
@@ -43,6 +50,10 @@ namespace Calculator
             return result;
         }
 
+        /// <summary>
+        /// Multiplication, Division and Power.
+        /// </summary>
+        /// <returns></returns>
         private AbstractSyntaxTree Term()
         {
             var result = Factor();
@@ -69,6 +80,10 @@ namespace Calculator
             return result;
         }
 
+        /// <summary>
+        /// Validate current token and move to the next.
+        /// </summary>
+        /// <param name="type"></param>
         private void Eat(TokenType type)
         {
             if (_currentToken.Type == type)
@@ -77,10 +92,14 @@ namespace Calculator
             }
             else
             {
-                throw new Exception();
+                throw new UnexpectedTokenException(type);
             }
         }
 
+        /// <summary>
+        /// Parse symbol expression.
+        /// </summary>
+        /// <returns></returns>
         private SymbolNode Symbol()
         {
             var result = _currentToken;
@@ -88,6 +107,10 @@ namespace Calculator
             return new SymbolNode(new Symbol(result.Value.ToString()));
         }
 
+        /// <summary>
+        /// Process factor expression.
+        /// </summary>
+        /// <returns></returns>
         private AbstractSyntaxTree Factor()
         {
             if (_currentToken.Type == TokenType.Number)
@@ -137,7 +160,7 @@ namespace Calculator
                 return left;
             }
 
-            throw new Exception();
+            throw new UnexpectedTokenException(_currentToken.Type);
         }
     }
 }
