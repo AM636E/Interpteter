@@ -40,6 +40,10 @@ namespace Calculator
             {
                 case TokenType.Div:
                     {
+                        if(right == 0)
+                        {
+                            throw new ZeroDivizionException();
+                        }
                         return left / right;
                     }
                 case TokenType.Mul:

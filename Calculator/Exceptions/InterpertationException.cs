@@ -16,4 +16,9 @@ namespace Calculator.Exceptions
     {
         public UnknownSymbolException(string symbolName) : base($"Unknown symbol: {symbolName}.") { }
     }
+
+    public class ZeroDivizionException : InterpertationException
+    {
+        public ZeroDivizionException() : base("(Zero division)") { }
+    }
 }
