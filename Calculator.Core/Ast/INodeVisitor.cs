@@ -1,7 +1,6 @@
-﻿using Calculator.Ast.Nodes;
-using Calculator.Nodes;
+﻿using Calculator.Core.Ast.Nodes;
 
-namespace Calculator
+namespace Calculator.Core.Ast
 {
     public interface INodeVisitor
     {

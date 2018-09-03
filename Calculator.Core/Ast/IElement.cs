@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.Core.Ast
 {
     public interface IElement
     {

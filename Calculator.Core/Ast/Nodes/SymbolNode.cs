@@ -1,6 +1,6 @@
-﻿using Calculator.Symbols;
+﻿using Calculator.Core.Symbols;
 
-namespace Calculator.Ast.Nodes
+namespace Calculator.Core.Ast.Nodes
 {
     public class SymbolNode : AbstractSyntaxTree
     {

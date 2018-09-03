@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Calculator.Exceptions
+namespace Calculator.Core.Exceptions
 {
     public class InterpertationException : Exception
     {

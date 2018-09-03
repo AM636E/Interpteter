@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Calculator.Symbols
+namespace Calculator.Core.Symbols
 {
     public class ScopedSymbolTable : SymbolTable
     {

@@ -1,9 +1,9 @@
-﻿using Calculator.Ast.Nodes;
-using Calculator.Exceptions;
-using Calculator.Nodes;
-using Calculator.Symbols;
+﻿using Calculator.Core.Ast;
+using Calculator.Core.Ast.Nodes;
+using Calculator.Core.Exceptions;
+using Calculator.Core.Symbols;
 
-namespace Calculator
+namespace Calculator.Core
 {
     /// <summary>
     /// Parses a string and return an AST.

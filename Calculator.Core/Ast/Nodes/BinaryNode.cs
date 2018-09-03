@@ -1,4 +1,4 @@
-﻿namespace Calculator.Nodes
+﻿namespace Calculator.Core.Ast.Nodes
 {
     public class BinaryNode : AbstractSyntaxTree
     {

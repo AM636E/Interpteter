@@ -1,4 +1,4 @@
-﻿namespace Calculator.Symbols
+﻿namespace Calculator.Core.Symbols
 {
     public class VarSymbol : Symbol
     {

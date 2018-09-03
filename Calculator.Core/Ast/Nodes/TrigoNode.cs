@@ -1,6 +1,6 @@
-﻿using Calculator.Nodes;
+﻿using Calculator.Core.Ast.Nodes;
 
-namespace Calculator.Ast.Nodes
+namespace Calculator.Core.Ast.Nodes
 {
     public enum TrigonometricType
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Calculator.Ast.Nodes
+namespace Calculator.Core.Ast.Nodes
 {
     public class TemplateNode : AbstractSyntaxTree
     {

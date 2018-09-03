@@ -1,11 +1,11 @@
-﻿using Calculator.Ast.Nodes;
-using Calculator.Exceptions;
-using Calculator.Nodes;
-using Calculator.Symbols;
+﻿using Calculator.Core.Ast;
+using Calculator.Core.Ast.Nodes;
+using Calculator.Core.Exceptions;
+using Calculator.Core.Symbols;
 using System;
 using System.Collections.Generic;
 
-namespace Calculator
+namespace Calculator.Core
 {
     /// <summary>
     /// Interprets AST.

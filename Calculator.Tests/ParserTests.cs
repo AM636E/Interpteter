@@ -1,4 +1,5 @@
-﻿using Calculator.Nodes;
+﻿using Calculator.Core;
+using Calculator.Core.Ast.Nodes;
 using System;
 using Xunit;
 

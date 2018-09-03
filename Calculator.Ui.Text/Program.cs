@@ -1,4 +1,5 @@
 ﻿using System;
+using Calculator.Core;
 
 namespace Calculator.Ui.Text
 {
