@@ -55,6 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Collections\CustomObservableCollection.cs" />
+    <Compile Include="Collections\ObservableSymbolCollection.cs" />
+    <Compile Include="Commands\InterpetCommand.cs" />
+    <Compile Include="Model\HistoryItem.cs" />
+    <Compile Include="Model\SymbolItem.cs" />
+    <Compile Include="NotifyPropertyChangedBase.cs" />
+    <Compile Include="Commands\AppendCommand.cs" />
+    <Compile Include="ViewModel\InterpteterViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,9 +102,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Calculator.Core\Calculator.Core.csproj">
       <Project>{c7028bd5-edcc-4913-8fec-62e215944b8e}</Project>

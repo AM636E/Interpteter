@@ -21,6 +21,8 @@ namespace Calculator.Core
             ["PI"] = Math.PI
         };
 
+        public static Dictionary<string, double> SymbolDictionary => SymbolNameToValue;
+
         public Interpreter(string text)
         {
             _parser = new Parser(text);
@@ -40,7 +42,7 @@ namespace Calculator.Core
             {
                 case TokenType.Div:
                     {
-                        if(right == 0)
+                        if (right == 0)
                         {
                             throw new ZeroDivizionException();
                         }
