@@ -114,7 +114,7 @@ namespace Calculator
                     return Token.Div;
                 }
 
-                if(currentChar == '^')
+                if (currentChar == '^')
                 {
                     Advance();
                     return Token.Pow;
@@ -132,11 +132,11 @@ namespace Calculator
                     return new Token { Type = TokenType.Rp, Value = ')' };
                 }
 
-                if(currentChar == '=')
+                if (currentChar == '=')
                 {
                     Advance();
                     return Token.Assign;
-                }                
+                }
             }
 
             return new Token { Type = TokenType.End };
@@ -145,7 +145,7 @@ namespace Calculator
         private object Symbol()
         {
             string result = string.Empty;
-            while(currentChar.HasValue && char.IsLetterOrDigit(currentChar.Value))
+            while (currentChar.HasValue && char.IsLetterOrDigit(currentChar.Value))
             {
                 result += currentChar;
                 Advance();

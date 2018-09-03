@@ -24,6 +24,21 @@ namespace Calculator
             return Expr();
         }
 
+        public AbstractSyntaxTree Power()
+        {
+            var result = Factor();
+
+            while (_currentToken.Type == TokenType.Pow)
+            {
+                var token = _currentToken;
+                Eat(TokenType.Pow);
+
+                result = new BinaryNode(result, token, Power());
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Addition and Substraction.
         /// </summary>
@@ -56,9 +71,9 @@ namespace Calculator
         /// <returns></returns>
         private AbstractSyntaxTree Term()
         {
-            var result = Factor();
+            var result = Power();
 
-            while (_currentToken.Type == TokenType.Mul || _currentToken.Type == TokenType.Div || _currentToken.Type == TokenType.Pow)
+            while (_currentToken.Type == TokenType.Mul || _currentToken.Type == TokenType.Div)
             {
                 var token = _currentToken;
                 if (_currentToken.Type == TokenType.Mul)
@@ -68,10 +83,6 @@ namespace Calculator
                 else if (_currentToken.Type == TokenType.Div)
                 {
                     Eat(TokenType.Div);
-                }
-                else if (_currentToken.Type == TokenType.Pow)
-                {
-                    Eat(TokenType.Pow);
                 }
 
                 result = new BinaryNode(result, token, Factor());
