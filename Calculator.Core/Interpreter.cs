@@ -18,7 +18,8 @@ namespace Calculator.Core
         private static SymbolTable _symbolTable = new SymbolTable();
         private static Dictionary<string, double> SymbolNameToValue = new Dictionary<string, double>
         {
-            ["PI"] = Math.PI
+            ["PI"] = Math.PI,
+            ["E"] = Math.E
         };
 
         public static Dictionary<string, double> SymbolDictionary => SymbolNameToValue;
