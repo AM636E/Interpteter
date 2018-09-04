@@ -7,7 +7,6 @@ namespace Calculator.Core.Symbols
     public class SymbolHolder
     {
         private readonly SymbolTable _table;
-
         private readonly SymbolTable _symbolTable;
 
         private Dictionary<string, double> _symbolNameToValue { get; } = new Dictionary<string, double>
@@ -56,7 +55,7 @@ namespace Calculator.Core.Symbols
         {
             return _table.HasSymbol(name);
         }
-
+        
         public static SymbolHolder Default => new SymbolHolder(new SymbolTable());
     }
 }

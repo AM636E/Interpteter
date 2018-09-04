@@ -69,6 +69,11 @@ namespace Calculator.Core
             throw new Exception();
         }
 
+        public static double Interpret(string text)
+        {
+            return new Interpreter(text).Interpret();
+        }
+
         public double VisitNumber(NumberNode number)
         {
             return number.Value;
