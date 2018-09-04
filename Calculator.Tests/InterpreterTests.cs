@@ -1,4 +1,6 @@
 ﻿using Calculator.Core;
+using Calculator.Core.Exceptions;
+using Calculator.Core.Symbols;
 using Xunit;
 
 namespace Calculator.Tests
@@ -24,6 +26,49 @@ namespace Calculator.Tests
             var interpteter = new Interpreter(expression);
             var actual = interpteter.Interpret();
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TestWithSymbols()
+        {
+            var table = new SymbolTable();
+            var holder = new SymbolHolder(table);
+            var interpreter = new Interpreter("a=2+2", holder);
+            interpreter.Interpret();
+
+            Assert.True(table.HasSymbol("a"));
+            Assert.Equal(4, holder.Get("a"));
+
+            interpreter = new Interpreter("b=a+a", holder);
+            interpreter.Interpret();
+            Assert.True(table.HasSymbol("b"));
+            Assert.Equal(8, holder.Get("b"));
+        }
+
+        [Fact]
+        public void TestWithUnknownSymbols()
+        {
+            var table = new SymbolTable();
+            var holder = new SymbolHolder(table);
+            var interpreter = new Interpreter("a", holder);
+
+            Assert.Throws<UnknownSymbolException>(() =>
+            {
+                interpreter.Interpret();
+            });
+        }
+
+        [Fact]
+        public void TestWithReservedSymbols()
+        {
+            var table = new SymbolTable();
+            var holder = new SymbolHolder(table);
+            var interpreter = new Interpreter("PI=3", holder);
+
+            Assert.Throws<ReservedSymbolException>(() =>
+            {
+                interpreter.Interpret();
+            });
         }
     }
 }

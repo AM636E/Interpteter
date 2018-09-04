@@ -15,18 +15,17 @@ namespace Calculator.Core
     public class Interpreter : INodeVisitor
     {
         private Parser _parser;
-        private static SymbolTable _symbolTable = new SymbolTable();
-        private static Dictionary<string, double> SymbolNameToValue = new Dictionary<string, double>
-        {
-            ["PI"] = Math.PI,
-            ["E"] = Math.E
-        };
+        private SymbolHolder _symbolHolder;
 
-        public static Dictionary<string, double> SymbolDictionary => SymbolNameToValue;
-
-        public Interpreter(string text)
+        public Interpreter(string text, SymbolHolder symbolHolder)
         {
             _parser = new Parser(text);
+            _symbolHolder = symbolHolder;
+        }
+
+        public Interpreter(string text) : this(text, SymbolHolder.Default)
+        {
+
         }
 
         public double Visit(AbstractSyntaxTree ast)
@@ -123,17 +122,7 @@ namespace Calculator.Core
         /// <returns></returns>
         public double VisitVar(SymbolNode symbolNode)
         {
-            if (!_symbolTable.HasSymbol(symbolNode.Symbol.Name))
-            {
-                throw new UnknownSymbolException($"{symbolNode.Symbol.Name}");
-            }
-
-            if (SymbolNameToValue.ContainsKey(symbolNode.Symbol.Name))
-            {
-                return SymbolNameToValue[symbolNode.Symbol.Name];
-            }
-
-            throw new UnknownSymbolException(symbolNode.Symbol.Name);
+            return _symbolHolder.Get(symbolNode.Symbol.Name);
         }
 
         /// <summary>
@@ -143,8 +132,11 @@ namespace Calculator.Core
         /// <returns></returns>
         public double VisitAssign(AssignNode assignNode)
         {
-            _symbolTable.Define(assignNode.Symbol.Symbol);
-            return SymbolNameToValue[assignNode.Symbol.Symbol.Name] = Visit(assignNode.Expr);
+            _symbolHolder.Define(assignNode.Symbol.Symbol);
+            var result = Visit(assignNode.Expr);
+            _symbolHolder.Set(assignNode.Symbol.Symbol, result);
+
+            return result;
         }
     }
 }

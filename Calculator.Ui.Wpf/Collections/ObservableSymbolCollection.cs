@@ -1,4 +1,5 @@
-﻿using Calculator.Ui.Wpf.Model;
+﻿using Calculator.Core.Symbols;
+using Calculator.Ui.Wpf.Model;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -7,11 +8,11 @@ namespace Calculator.Ui.Wpf.Collections
 {
     public class ObservableSymbolCollection : INotifyCollectionChanged, IEnumerable<SymbolItem>
     {
-        private readonly Dictionary<string, double> _symbolDictionary;
+        private readonly IReadOnlyDictionary<string, double> _symbolDictionary;
         private List<SymbolItem> Items { get; set; } = new List<SymbolItem>();
-        public ObservableSymbolCollection(Dictionary<string, double> symbolDictionary)
+        public ObservableSymbolCollection(SymbolHolder holder)
         {
-            _symbolDictionary = symbolDictionary;
+            _symbolDictionary = holder.SymbolDictionary;
             Update();
         }
 
