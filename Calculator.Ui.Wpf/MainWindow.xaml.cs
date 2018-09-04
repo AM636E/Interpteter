@@ -1,5 +1,6 @@
 ﻿using Calculator.Ui.Wpf.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Calculator.Ui.Wpf
 {
@@ -11,6 +12,16 @@ namespace Calculator.Ui.Wpf
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            var tb = (TextBox)sender;
+            //if (tb.Text.Length > 0)
+            //{
+            //    tb.SelectionStart = tb.Text.Length;
+            //    tb.SelectionLength = 0;
+            //}
         }
     }
 }

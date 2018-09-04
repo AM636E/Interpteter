@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Calculator.Ui.Wpf"
         xmlns:vm="clr-namespace:Calculator.Ui.Wpf.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+         FocusManager.FocusedElement="{Binding ElementName=ExpressionBox, Path=.}"
+        >
     <Window.DataContext>
         <vm:InterpteterViewModel />
     </Window.DataContext>
@@ -22,7 +24,9 @@
 
         <TextBox Grid.Row="0" 
                  Grid.Column="0" 
+                 Name="ExpressionBox"
                  Text="{Binding Path=Expression, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 TextChanged="TextBox_TextChanged"
                  >
             <TextBox.InputBindings>
                 <KeyBinding Key="Enter" Command="{Binding Path=InterpterCommand}" />

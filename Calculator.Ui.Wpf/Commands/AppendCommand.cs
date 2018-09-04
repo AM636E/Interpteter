@@ -17,7 +17,7 @@ namespace Calculator.Ui.Wpf.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return !string.IsNullOrEmpty(parameter?.ToString());
         }
 
         public void Execute(object parameter)
