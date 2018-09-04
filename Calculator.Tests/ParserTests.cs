@@ -1,6 +1,5 @@
 ﻿using Calculator.Core;
 using Calculator.Core.Ast.Nodes;
-using System;
 using Xunit;
 
 namespace Calculator.Tests

@@ -17,6 +17,8 @@ namespace Calculator.Tests
         [InlineData("2^(1+1)^(2+1)", 256)]
         [InlineData("2^(1*2)^(1.5*2)", 256)]
         [InlineData("1.5*2", 3)]
+        [InlineData("1^1/2", 0.5)]
+        [InlineData("0.5+1^1/2", 1)]
         public void TestExpressions(string expression, double expected)
         {
             var interpteter = new Interpreter(expression);
