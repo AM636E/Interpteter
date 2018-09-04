@@ -29,6 +29,24 @@ namespace Calculator.Tests
         }
 
         [Fact]
+        public void TestZeroDivision()
+        {
+            var interpreter = new Interpreter("40/(30-30)");
+
+            Assert.Throws<ZeroDivizionException>(() => interpreter.Interpret());
+        }
+
+        [Theory]
+        [InlineData("2-(4+1")]
+        [InlineData("2-")]
+        [InlineData("2-2*")]
+        public void InvalidExpressionException(string expression)
+        {
+            var interpreter = new Interpreter(expression);
+            Assert.Throws<UnexpectedTokenException>(() => interpreter.Interpret());
+        }
+
+        [Fact]
         public void TestWithSymbols()
         {
             var table = new SymbolTable();
