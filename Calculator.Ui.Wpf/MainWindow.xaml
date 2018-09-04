@@ -44,17 +44,35 @@
                 <TextBox.InputBindings>
                     <KeyBinding Key="Enter" Command="{Binding Path=InterpterCommand}" />
                 </TextBox.InputBindings>
+
             </TextBox>
 
-            <TextBlock Text="{Binding CurrentValue}" 
+            <TextBlock Text="{Binding CurrentValue, NotifyOnTargetUpdated=True}"
+                       Name="ResultText"
                        FontSize="20"
                        FontWeight="Bold"
                        TextAlignment="Center" 
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center" 
                        Foreground="{Binding IsValid, Converter={StaticResource BoolToColorConverter}}"
-                       Margin="15" />
-
+                       Margin="15" >
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetName="ResultText"
+                                    Storyboard.TargetProperty="(TextBlock.Opacity)"
+                                    From="0.6"
+                                    To="1.0" Duration="0:0:0.200"
+                                    AutoReverse="False"
+                                    >
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
         </StackPanel>
 
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding HistoryItems}">
