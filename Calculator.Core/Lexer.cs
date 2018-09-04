@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Calculator.Core
+﻿namespace Calculator.Core
 {
     public class Lexer
     {
