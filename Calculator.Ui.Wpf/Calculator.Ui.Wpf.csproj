@@ -58,6 +58,7 @@
     <Compile Include="Collections\CustomObservableCollection.cs" />
     <Compile Include="Collections\ObservableSymbolCollection.cs" />
     <Compile Include="Commands\InterpetCommand.cs" />
+    <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Model\HistoryItem.cs" />
     <Compile Include="Model\SymbolItem.cs" />
     <Compile Include="NotifyPropertyChangedBase.cs" />

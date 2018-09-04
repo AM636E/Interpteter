@@ -26,16 +26,18 @@ namespace Calculator.Ui.Wpf.Commands
         {
             try
             {
-                var value = new Interpreter(_vm.Expression).Interpret();
+                var value = new Interpreter(_vm.Expression, _vm.SymbolHolder).Interpret();
                 _vm.HistoryItems.AddAndNotify(new HistoryItem
                 {
                     Expression = _vm.Expression,
                     Value = value.ToString()
                 });
                 _vm.Expression = string.Empty;
+                _vm.IsValid = true;
             }
             catch (Exception ex)
             {
+                _vm.IsValid = false;
                 _vm.HistoryItems.AddAndNotify(new HistoryItem
                 {
                     Expression = _vm.Expression,

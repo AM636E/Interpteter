@@ -5,10 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator.Ui.Wpf"
         xmlns:vm="clr-namespace:Calculator.Ui.Wpf.ViewModel"
+        xmlns:converters="clr-namespace:Calculator.Ui.Wpf.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Calculator" Height="450" Width="800"
          FocusManager.FocusedElement="{Binding ElementName=ExpressionBox, Path=.}"
         >
+    <Window.Resources>
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+    </Window.Resources>
+
     <Window.DataContext>
         <vm:InterpteterViewModel />
     </Window.DataContext>
@@ -22,16 +27,35 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" 
-                 Grid.Column="0" 
+        <StackPanel Grid.Row="0" 
+                 Grid.Column="0">
+            <TextBox  
+                Height="30"
+                FontSize="15"
+                FontWeight="DemiBold"
+                TextAlignment="Center"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Foreground="{Binding IsValid, Converter={StaticResource BoolToColorConverter}}"
                  Name="ExpressionBox"
                  Text="{Binding Path=Expression, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 TextChanged="TextBox_TextChanged"
+                 LostFocus="ExpressionBox_LostFocus"
                  >
-            <TextBox.InputBindings>
-                <KeyBinding Key="Enter" Command="{Binding Path=InterpterCommand}" />
-            </TextBox.InputBindings>
-        </TextBox>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding Path=InterpterCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <TextBlock Text="{Binding CurrentValue}" 
+                       FontSize="20"
+                       FontWeight="Bold"
+                       TextAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       Foreground="{Binding IsValid, Converter={StaticResource BoolToColorConverter}}"
+                       Margin="15" />
+
+        </StackPanel>
 
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding HistoryItems}">
             <ListBox.ItemTemplate>
@@ -42,7 +66,7 @@
 
                         <StackPanel.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
-                                           Command="{Binding DataContext.AppendCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" 
+                                          Command="{Binding DataContext.AppendCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" 
                                           CommandParameter="{Binding Expression}" />
                         </StackPanel.InputBindings>
                     </StackPanel>

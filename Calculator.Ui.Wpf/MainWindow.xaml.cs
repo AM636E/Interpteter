@@ -14,14 +14,15 @@ namespace Calculator.Ui.Wpf
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void ExpressionBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var tb = (TextBox)sender;
-            //if (tb.Text.Length > 0)
-            //{
-            //    tb.SelectionStart = tb.Text.Length;
-            //    tb.SelectionLength = 0;
-            //}
+
+            if (tb.Text.Length > 0)
+            {
+                tb.SelectionStart = tb.Text.Length;
+                tb.SelectionLength = 0;
+            }
         }
     }
 }
