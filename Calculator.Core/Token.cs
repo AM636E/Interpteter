@@ -16,7 +16,8 @@
         Assign,
         Compare,
         Pow,
-        Trig
+        Trig,
+        Raw
     }
 
     public class Token
@@ -38,7 +39,7 @@
 
         public override string ToString()
         {
-            return $"T:[{Type}]|V={Value}";
+            return $"{Value}: [{Type}]";
         }
     }
 }

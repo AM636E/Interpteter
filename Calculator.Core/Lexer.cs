@@ -135,6 +135,11 @@
                     Advance();
                     return Token.Assign;
                 }
+
+                var result = new Token { Type = TokenType.Raw, Value = currentChar };
+                Advance();
+
+                return result;
             }
 
             return new Token { Type = TokenType.End };
